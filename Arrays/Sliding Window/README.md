@@ -1,4 +1,5 @@
 
+
 # Sliding Window: Tracking Data in a Subset
 
 ### Goal
@@ -164,7 +165,55 @@ for(int right = 0; right < arr.size(); right++) {
 
 ---
 
-# 6. Complexity Analysis
+# 6. From Brute Force to Optimized Solution
+
+## Brute Force
+
+### Idea
+
+Recalculate the target condition (sum, max, min) for every single subarray from scratch using nested loops.
+
+### Time Complexity
+
+O(n * k)
+
+### Skeleton
+
+```cpp
+for(int i = 0; i <= n - k; i++) 
+{
+    int currentSum = 0;
+    for(int j = i; j < i + k; j++) 
+    {
+        currentSum += arr[j];
+    }
+}
+
+```
+
+---
+
+## Optimized Approach
+
+### Idea
+
+Calculate the first window, then simply add the new element and subtract the old element as you slide forward.
+
+### Time Complexity
+
+O(n)
+
+### Skeleton
+
+```cpp
+// 1. Get first window
+// 2. Slide window: current += new_element - old_element
+
+```
+
+---
+
+# 7. Complexity Analysis
 
 | Complexity | Value | Reason |
 | --- | --- | --- |
@@ -173,7 +222,7 @@ for(int right = 0; right < arr.size(); right++) {
 
 ---
 
-# 7. Common Pitfalls
+# 8. Common Pitfalls
 
 ## Off-by-One Errors
 
@@ -185,7 +234,37 @@ In variable windows, if you only need to find the *maximum* length, sometimes yo
 
 ---
 
-# 8. Example Problem
+# 9. Related Patterns
+
+```text
+Two Pointers
+     ↓
+Sliding Window
+     ↓
+Dynamic Programming (Sometimes overlaps with String problems)
+
+```
+
+Sliding Window is essentially a specific variation of the **Same Direction Two Pointers** pattern. The two pointers act as the left and right boundaries of the window.
+
+---
+
+# 10. Pattern Recognition Flowchart
+
+```text
+Array, String, or Linked List?
+        ↓
+Looking for a CONTIGUOUS subarray or substring?
+        ↓
+Need to calculate sum, max, min, or length?
+        ↓
+Think Sliding Window
+
+```
+
+---
+
+# 11. Example Problem
 
 ## Problem Information
 
@@ -244,7 +323,7 @@ Output: `51 / 4 = 12.75`
 
 ---
 
-# 9. Practice Problems
+# 12. Practice Problems
 
 ## Easy (Build Intuition)
 
