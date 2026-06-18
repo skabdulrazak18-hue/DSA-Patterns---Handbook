@@ -35,11 +35,11 @@ It helps:
 
 Think about Hashing when:
 
-✓ You need to look up previous elements instantly.
-✓ You need to check for the existence of an element.
-✓ You need to count the frequency of elements or characters.
-✓ You are asked to find duplicates or unique elements.
-✓ You need to find a specific pair of elements (like summing to a target).
+1. You need to look up previous elements instantly.
+2. You need to check for the existence of an element.
+3. You need to count the frequency of elements or characters.
+4. You are asked to find duplicates or unique elements.
+5. You need to find a specific pair of elements (like summing to a target).
 
 ---
 
