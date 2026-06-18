@@ -316,7 +316,21 @@ Input Array: `nums = [-2, 0, 3, -5, 2, -1]`
 * `left = 2`, `right = 5`
 * Formula: `prefix[5] - prefix[1]`
 * Calculation: `-3 - (-2)` = `-1`
+  ---------
+How to Identify Prefix Sum (MOST IMPORTANT)
+Use Prefix Sum when you see:
 
+The need to query the sum of a contiguous subarray multiple times.
+
+"Subarray sum equals exactly K" (especially if the array contains negative numbers).
+
+"Number of subarrays" that meet a specific sum or mathematical condition (like odd/even sum).
+
+Divisibility conditions (e.g., "Subarray sum divisible by K").
+
+The problem asks for cumulative totals, running balances, or equilibrium points (where left sum equals right sum).
+
+Key Rule: If you need to calculate the sum of elements between indices i and j in O(1) time, or if you are looking for an exact subarray sum in an array with negative numbers → Prefix Sum.
 ---
 
 # 12. Practice Problems
