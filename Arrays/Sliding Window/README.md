@@ -38,10 +38,10 @@ It helps:
 ## The Checklist
 
 Think about Sliding Window when:
-✓ The problem involves arrays, strings, or linked lists.
-✓ You are asked to find a **contiguous** subarray or substring.
-✓ You need to calculate a sum, average, maximum, or minimum of a subset.
-✓ You need to find the longest or shortest sequence that meets a certain condition.
+1. The problem involves arrays, strings, or linked lists.
+2. You are asked to find a **contiguous** subarray or substring.
+3. You need to calculate a sum, average, maximum, or minimum of a subset.
+4. You need to find the longest or shortest sequence that meets a certain condition.
 
 ---
 
