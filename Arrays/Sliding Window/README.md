@@ -322,7 +322,21 @@ Input: `nums = [1, 12, -5, -6, 50, 3]`, `k = 4`
 Output: `51 / 4 = 12.75`
 
 ---
+How to Identify Sliding Window (MOST IMPORTANT)
+Use Sliding Window when you see:
 
+Contiguous subarray / substring
+
+“Longest / shortest / maximum / minimum”
+
+“K size subarray/substring”
+
+“At most / at least / exactly K condition”
+
+“Count / sum in a range”
+
+Key Rule: If the condition is about a continuous block → Sliding Window.
+-----
 # 12. Practice Problems
 
 ## Easy (Build Intuition)
