@@ -36,10 +36,10 @@ It helps:
 
 Think about Basic Intervals when:
 
-01. You are given a 2D array of `[start, end]` intervals.
-02. You are asked to detect if any items **overlap** or touch.
-03. You need to **merge** or combine ranges into disjoint sets.
-04. You need to insert a new range into an existing sorted timeline.
+1. You are given a 2D array of `[start, end]` intervals.
+2. You are asked to detect if any items **overlap** or touch.
+3. You need to **merge** or combine ranges into disjoint sets.
+4. You need to insert a new range into an existing sorted timeline.
 
 ---
 
@@ -54,11 +54,11 @@ Think about Basic Intervals when:
 
 # 4. Theory Behind the Pattern
 
-Overlap detection follows a strict mathematical rule. Two intervals `A` and `B` (where `A` starts before `B`) will overlap if and only if: `B.start <= A.end`.
+Overlap detection follows a strict mathematical rule. Two intervals `A` and `B` (where `A` starts before `B`) overlap if and only if: `B.start <= A.end`.
 
 **Overlap condition to remember:** `currentStart <= previousEnd`
 
-By sorting the array based on the `start` value first, you guarantee that you only ever need to compare the current interval with the very last interval you processed.
+By sorting based on the `start` value, you guarantee that you only need to compare the current interval with the last interval you processed.
 
 ---
 
@@ -126,8 +126,8 @@ while(i < n && intervals[i][0] <= newInterval[1]) {
 # 9. Common Pitfalls
 
 * **Forgetting to Sort:** If you do not sort by start time, the sweep logic fails.
-* **Not using `max()` for End Time:** When merging `[1, 10]` and `[2, 3]`, you must use `max(10, 3)` to correctly result in `[1, 10]`.
-* **Using `<` instead of `<=`:** Intervals `[1,3]` and `[3,5]` are considered overlapping in Merge Intervals because `currentStart <= previousEnd`. Boundary mistakes are common.
+* **Not using `max()` for End Time:** When merging, ensure you capture the furthest possible end time using `max(lastEnd, currentEnd)`.
+* **Using `<` instead of `<=`:** Intervals `[1,3]` and `[3,5]` overlap because `currentStart <= previousEnd`. Boundary mistakes are common.
 
 ---
 
@@ -159,15 +159,71 @@ Sweep and Merge
 
 ---
 
-#  Identifying Basic Interval Problems
+# 12.1 Example Problem: Merge Intervals
 
-* Problems with a 2D array formatted as `[start, end]`.
-* Problems involving "merging," "combining," or "inserting" ranges.
-* Problems where you must check if any two events overlap or conflict.
+### Intuition
+
+If we line all the events up in chronological order, we can just walk down the timeline. If the next event starts before our current event finishes, they belong together in one big event.
+
+### Code (C++)
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        if(intervals.size() <= 1) return intervals;
+        sort(intervals.begin(), intervals.end()); // 1. Sort
+        vector<vector<int>> res;
+        res.push_back(intervals[0]);
+        for(int i = 1; i < intervals.size(); i++) {
+            if(intervals[i][0] <= res.back()[1]) { // 2. Overlap
+                res.back()[1] = max(res.back()[1], intervals[i][1]);
+            } else {
+                res.push_back(intervals[i]);
+            }
+        }
+        return res;
+    }
+};
+
+```
+
+### Dry Run Table
+
+Input: `[[1,3], [8,10], [2,6], [15,18]]`
+
+| Step | Action | Sorted Array State | `result` State |
+| --- | --- | --- | --- |
+| 1 | Sort | `[[1,3], [2,6], [8,10], [15,18]]` | Empty |
+| 2 | Push 1st | `[[1,3], ...]` | `[[1,3]]` |
+| 3 | Compare `[2,6]` | `2 <= 3` (Overlap!) | `[[1,6]]` |
+| 4 | Compare `[8,10]` | `8 > 6` (No Overlap) | `[[1,6], [8,10]]` |
+| 5 | Compare `[15,18]` | `15 > 10` (No Overlap) | `[[1,6], [8,10], [15,18]]` |
+
+### Complexity Analysis
+
+Complexity Analysis
+Time Complexity: O(n log n), where n is the number of intervals.
+
+The sort() function dominates the complexity by taking O(n log n) time.
+
+The subsequent for loop performs a linear pass through the sorted array, taking O(n) time.
+
+Total time = O(n log n) + O(n) = O(n log n).
+
+Space Complexity: O(n).
+
+In the worst case (where no intervals overlap), the result vector will store all n intervals from the input, requiring O(n) extra space.
 
 ---
+Identifying Basic Interval Problems
+Problems with a 2D array formatted as [start, end].
 
-# 12. Practice Problems
+Problems involving "merging," "combining," or "inserting" ranges.
+
+Problems where you must check if any two events overlap or conflict.
+--------------
+# 12.2. Practice Problems
 
 ### Easy (Build Intuition)
 
@@ -183,6 +239,3 @@ Sweep and Merge
 | 3 | Merge Intervals | [https://leetcode.com/problems/merge-intervals/](https://leetcode.com/problems/merge-intervals/) |
 | 4 | Insert Interval | [https://leetcode.com/problems/insert-interval/](https://leetcode.com/problems/insert-interval/) |
 
----
-
-**Your Basic and Intermediate handbooks are now fully aligned and ready for GitHub. Shall we move to the Advanced section (Heaps and Concurrency)?**
