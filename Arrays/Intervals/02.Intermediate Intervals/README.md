@@ -1,4 +1,7 @@
 
+
+---
+
 # Intermediate Intervals: Greedy Scheduling
 
 ### Goal
@@ -36,10 +39,10 @@ It helps:
 ## The Checklist
 
 Think about Intermediate Intervals when:
-01. You are given a 2D array of `[start, end]` intervals.
-02. You are asked to **maximize** the number of meetings or events.
-03. You are asked to **minimize** the number of removals to resolve overlaps.
-04 You are asked to find the minimum resources (arrows/lines) to pierce all intervals.
+1. You are given a 2D array of `[start, end]` intervals.
+2. You are asked to **maximize** the number of meetings or events.
+3. You are asked to **minimize** the number of removals to resolve overlaps.
+4. You are asked to find the minimum resources (arrows/lines) to pierce all intervals.
 
 ## Key Phrases to Watch For
 
@@ -118,7 +121,7 @@ return true;
 | Complexity | Value | Reason |
 | --- | --- | --- |
 | **Time Complexity** | **$O(n \log n)$** | Sorting dominates the complexity. The greedy sweep is $O(n)$. |
-| **Space Complexity** | **$O(1)$** | Constant space required for the selection logic. |
+| **Space Complexity** | **$O(1)$** | Constant space required for the selection logic (no extra arrays needed). |
 
 ---
 
@@ -161,40 +164,52 @@ Sort by END Time -> Greedy Sweep
 ---
 
 
-
 ---
 
-13. Example Problem: Non-overlapping IntervalsIntuitionTo keep the maximum number of intervals, we must remove the minimum number of overlapping ones. By sorting by end time, we always pick the interval that finishes earliest. This "Greedy Choice" is optimal because it leaves the most possible room for subsequent intervals to fit into the timeline.Code (C++)C++int eraseOverlapIntervals(vector<vector<int>>& intervals) {
-    if (intervals.empty()) return 0;
-    
-    // Sort by end time to make the greedy choice
-    sort(intervals.begin(), intervals.end(), [](const vector<int>& a, const vector<int>& b) {
+# 12. Example Problem: Non-overlapping Intervals
+
+**Intuition:** To keep the maximum number of intervals, remove the minimum number of overlapping ones. By sorting by end time, we ensure we always leave as much room as possible for the next event.
+
+**Code (C++):**
+
+```cpp
+int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+    sort(intervals.begin(), intervals.end(), [](auto& a, auto& b) {
         return a[1] < b[1];
     });
-    
-    int count = 0;
-    int lastEnd = intervals[0][1];
-    
-    for (size_t i = 1; i < intervals.size(); i++) {
-        if (intervals[i][0] < lastEnd) {
-            // Conflict found! We must remove this interval
-            count++; 
-        } else {
-            // No conflict: update the end boundary to the current interval
-            lastEnd = intervals[i][1];
-        }
+    int count = 0, lastEnd = intervals[0][1];
+    for (int i = 1; i < intervals.size(); i++) {
+        if (intervals[i][0] < lastEnd) count++; // Conflict!
+        else lastEnd = intervals[i][1];
     }
     return count;
 }
-Dry Run TableInput: intervals = [[1,2], [2,3], [3,4], [1,3]]StepActionlastEndcount (Removed)Note1Sort by end time-0Array: [[1,2], [2,3], [1,3], [3,4]]2Start at [1,2]20First interval kept3Check [2,3]302 >= 2 (No conflict), Update lastEnd4Check [1,3]311 < 3 (Conflict!), Increment count5Check [3,4]413 >= 3 (No conflict), Update lastEndFinal Result: 1 interval removed.Complexity AnalysisTime Complexity: $O(n \log n)$The sort() function is the most expensive operation, taking $O(n \log n)$.The single for loop iterates through the list once, which is $O(n)$.Total: $O(n \log n) + O(n) = \mathbf{O(n \log n)}$.Space Complexity: $O(1)$We only use a few integer variables (count, lastEnd, i) to keep track of our state. We do not create any additional data structures proportional to the input size, so it is $O(1)$ constant space.
------------
-#  Identifying Intermediate Problems
+
+```
+
+**Dry Run:** `intervals = [[1,2], [2,3], [3,4], [1,3]]`
+
+| Step | Action | `lastEnd` | `count` (Removed) | Note |
+| --- | --- | --- | --- | --- |
+| 1 | Sort by End | - | 0 | Sorted: `[[1,2], [2,3], [1,3], [3,4]]` |
+| 2 | Attend `[1,2]` | 2 | 0 | First interval kept |
+| 3 | Check `[2,3]` | 3 | 0 | `2 >= 2` (No conflict) |
+| 4 | Check `[1,3]` | 3 | 1 | `1 < 3` (Conflict!) |
+| 5 | Check `[3,4]` | 4 | 1 | `3 >= 3` (No conflict) |
+
+
+Complexity Analysis
+Complexity	Value	Reason
+Time Complexity	O(n log n)	Sorting the intervals takes O(n log n), and scanning them once takes O(n). Sorting dominates the total complexity.
+Space Complexity	O(1)	We only use a few variables to keep track of the answer and do not create any extra data structures.
+--------
+# . Identifying Intermediate Problems
 
 * You are asked to count how many items to "remove."
 * You are asked to fit the "maximum number of meetings" possible.
 * You need to "find the minimum number of points" to pierce all intervals (e.g., "minimum number of arrows").
-* -------------
-### Practice Problems
+----------
+**Practice Problems**
 
 | Order | Problem | Difficulty | Link |
 | --- | --- | --- | --- |
@@ -203,3 +218,4 @@ Dry Run TableInput: intervals = [[1,2], [2,3], [3,4], [1,3]]StepActionlastEndcou
 | 3 | Min Arrows to Burst Balloons | Medium | [Link](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/) |
 
 ---
+
