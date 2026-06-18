@@ -240,7 +240,7 @@ Use Basic Intervals when you see:
 * Problems dealing with times, meetings, schedules, or coordinate ranges.
 * The words "Overlap", "Merge", or "Combine".
 
-**👉 Key Rule:** If you are dealing with ranges of numbers and need to find where they cross over each other to form larger groups → Sort by **Start Time** and Merge.
+** Key Rule:** If you are dealing with ranges of numbers and need to find where they cross over each other to form larger groups → Sort by **Start Time** and Merge.
 
 ---
 
