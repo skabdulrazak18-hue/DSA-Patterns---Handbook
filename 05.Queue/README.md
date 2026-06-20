@@ -119,15 +119,6 @@ This distinction is crucial when moving from simple data structures to Tree and 
 
 ---
 
-## 10. Related Structures
-
-Queue
-↓
-Deque
-↓
-Monotonic Queue
-↓
-Sliding Window Problems
 ---------------------------------------------------------
 ---
 
