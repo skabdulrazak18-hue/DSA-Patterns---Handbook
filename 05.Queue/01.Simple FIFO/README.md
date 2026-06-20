@@ -1,6 +1,3 @@
-I have adopted this exact, polished structure for the **Breadth-First Search (BFS)** chapter, ensuring it matches the high-quality standard you’ve set for the handbook.
-
----
 
 # Pattern Name: Breadth-First Search (BFS)
 
@@ -213,4 +210,3 @@ vector<vector<int>> levelOrder(TreeNode* root) {
 
 ---
 
-**Breadth-First Search (BFS) is officially locked. Shall we proceed to `03. Multi-Source BFS`?**
