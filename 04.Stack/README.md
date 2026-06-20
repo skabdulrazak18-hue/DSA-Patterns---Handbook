@@ -1,5 +1,5 @@
 
- Stack 
+ # Algorithm: Stack
 
 ### Goal
 
