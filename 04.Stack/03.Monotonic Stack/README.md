@@ -193,6 +193,10 @@ vector<int> nextGreaterElement(vector<int>& nums) {
 | **2** | 1 | [0, 1] | Push 1 | [-1, -1, -1] |
 | **3** | 3 | [2] | Pop 1, Pop 0 | [3, 3, -1] |
 
+Time and Space Complexity
+Time Complexity: $O(n)$ — Every index is pushed and popped at most once, resulting in linear time.
+Space Complexity: $O(n)$ — In the worst case (e.g., a sorted array), all $n$ indices are stored in the stack.
+
 ---
 
 ## 14. Practice Problems
