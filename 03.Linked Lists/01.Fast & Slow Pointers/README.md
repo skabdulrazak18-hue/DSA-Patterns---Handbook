@@ -186,7 +186,6 @@ bool hasCycle(ListNode *head) {
 
 1. Linked List Cycle II — [Link](https://leetcode.com/problems/linked-list-cycle-ii/)
 2. Find the Duplicate Number — [Link](https://leetcode.com/problems/find-the-duplicate-number/)
-3. Happy Number — [Link](https://leetcode.com/problems/happy-number/)
 
 ---
 
